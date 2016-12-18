@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<openerp>
+  <data>
+    <record id="scuola_alunni_action" model="ir.actions.act_window">
+    <field name="name">Studenti</field>
+    <field name="res_model">scuola.alunni</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">Clicca su Crea per aggiungere uno studente.</p>
+    </field>
+    </record>
+    <record id="scuola_insegnanti_action" model="ir.actions.act_window">
+    <field name="name">Insegnanti</field>
+    <field name="res_model">scuola.insegnanti</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="area"></field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">Clicca su Crea per aggiungere un insegnante.</p>
+    </field>
+    </record>
+    <record id="scuola_sezioni_action" model="ir.actions.act_window">
+    <field name="name">Sezioni</field>
+    <field name="res_model">scuola.sezioni</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">Clicca su Crea per aggiungere una classe.</p>
+    </field>
+    </record>
+    <record id="scuola_materie_action" model="ir.actions.act_window">
+    <field name="name">Materie</field>
+    <field name="res_model">scuola.materie</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="help" type="html">
+      <p class="oe_view_nocontent_create">Clicca su Crea per aggiungere una materia.</p>
+    </field>
+    </record>
+    <menuitem id="scuola" name="Scuola Emu"/>
+    <menuitem id="scuola_menu" name="Scuola Emu" parent="scuola"/>
+    <menuitem id="scuola_alunni_menu"
+      name="Studenti"
+      parent="scuola_menu"
+      action="scuola_alunni_action"
+    />
+    <menuitem id="scuola_insegnanti_menu"
+      name="Insegnanti"
+      parent="scuola_menu"
+      action="scuola_insegnanti_action"
+    />
+    <menuitem id="scuola_sezioni_menu"
+      name="Sezioni"
+      parent="scuola_menu"
+      action="scuola_sezioni_action"
+    />
+    <menuitem id="scuola_materie_menu"
+      name="Materie"
+      parent="scuola_menu"
+      action="scuola_materie_action"
+    />
+
+
+  </data>
+</openerp>
