@@ -2,6 +2,19 @@
 
 <openerp>
   <data>
+
+       <record model="ir.ui.view" id="tree_alunni">
+            <field name="name">tree.alunni</field>
+            <field name="model">scuola.alunni</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="birthdate"/>
+                    <field name="sezione_id"/>
+                </tree>
+            </field>
+        </record>
+
     <record id="scuola_alunni_action" model="ir.actions.act_window">
     <field name="name">Studenti</field>
     <field name="res_model">scuola.alunni</field>
@@ -21,6 +34,18 @@
       <p class="oe_view_nocontent_create">Clicca su Crea per aggiungere un insegnante.</p>
     </field>
     </record>
+
+       <record model="ir.ui.view" id="tree_sezioni">
+            <field name="name">tree.sezioni</field>
+            <field name="model">scuola.sezioni</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="numero_alunni"/>
+                </tree>
+            </field>
+        </record>
+
     <record id="scuola_sezioni_action" model="ir.actions.act_window">
     <field name="name">Sezioni</field>
     <field name="res_model">scuola.sezioni</field>
@@ -30,6 +55,7 @@
       <p class="oe_view_nocontent_create">Clicca su Crea per aggiungere una classe.</p>
     </field>
     </record>
+
     <record id="scuola_materie_action" model="ir.actions.act_window">
     <field name="name">Materie</field>
     <field name="res_model">scuola.materie</field>
@@ -39,6 +65,54 @@
       <p class="oe_view_nocontent_create">Clicca su Crea per aggiungere una materia.</p>
     </field>
     </record>
+    
+       <!-- record model="ir.ui.view" id="form_studenti">
+            <field name="name">form.studenti</field>
+            <field name="model">scuola.alunni</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+			<field name="numero_alunni"/>
+                        <field name="alunni_id">
+			    <tree>
+			        <field name="name"/>
+			        <field name="birthdate"/>
+			    </tree>
+			</field>
+                        <field name="name"/>
+                        <field name="birthdate"/>
+                    </group>
+                </form>
+            </field>
+        </record -->
+
+
+       <record model="ir.ui.view" id="form_insegnanti">
+            <field name="name">form.insegnanti</field>
+            <field name="model">scuola.insegnanti</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="materia_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+       <record model="ir.ui.view" id="form_materie">
+            <field name="name">form.materie</field>
+            <field name="model">scuola.materie</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="name"/>
+                        <field name="docente_ids"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
     <menuitem id="scuola" name="Scuola Emu"/>
     <menuitem id="scuola_menu" name="Scuola Emu" parent="scuola"/>
     <menuitem id="scuola_alunni_menu"

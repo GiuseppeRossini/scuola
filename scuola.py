@@ -1,33 +1,38 @@
-from openerp.osv import osv, fields
+from openerp import models, fields, api
 
-class scuola_sezioni(osv.Model):
-  _name="scuola.sezioni"
-  _columns={
-  'name': fields.char('Sezione', size=64),
-  #'alunni_id': fields.many2one('scuola.alunni','Alunni'),
-  }
-class scuola_alunni(osv.Model):
-  _name="scuola.alunni"
-  _inherits={
-    'scuola.sezioni':'sezione_id',
-  }
-  _columns={
-  'name': fields.char('Studente', size=64),
-  'birthdate': fields.date('Data di nascita'),
-  'sezione_id': fields.many2one('scuola.sezioni','Sezione'),
-  }
-class scuola_insegnanti(osv.Model):
-  _name="scuola.insegnanti"
-  _inherits={
-    'scuola.materie':'area_id',
-  }
-  _columns={
-  'name': fields.char('Insegnante', size=64),
-  #'area': fields.selection([('1', 'italiano'), ('2', 'matematica'), ('3', 'inglese')], string='Materia', required=True,),
-  'area_id': fields.many2one('scuola.materie', 'Materia'),
-  }
-class scuola_materie(osv.Model):
-  _name="scuola.materie"
-  _columns={
-  'name': fields.char('Materia', size=64),
-  }
+class ScuolaSezioni(models.Model):
+  
+    _name="scuola.sezioni"
+
+    name = fields.Char("Sezione", size=64)
+    alunni_id = fields.One2many('scuola.alunni', 'sezione_id', string="Alunni")
+    numero_alunni = fields.Integer(compute='get_count_alunni')
+
+    def get_count_alunni(self):
+	for sez in self:
+	    sez.numero_alunni = len(sez.alunni_id)
+
+  
+class ScuolaAlunni(models.Model):
+    
+    _name="scuola.alunni"
+  
+    name = fields.Char("Studente", size=64)
+    birthdate = fields.Date("Data di nascita")
+    sezione_id = fields.Many2one('scuola.sezioni', string="Sezione") 
+  
+
+class ScuolaInsegnanti(models.Model):
+    
+    _name="scuola.insegnanti"
+  
+    name = fields.Char("Insegnante", size=64)
+    materia_ids = fields.Many2many('scuola.materie')
+
+
+class ScuolaMaterie(models.Model):
+  
+    _name="scuola.materie"
+  
+    name = fields.Char("Materia", size=64)
+    docente_ids = fields.Many2many('scuola.insegnanti')
